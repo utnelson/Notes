@@ -6,7 +6,7 @@
 To bruteforce a Login catch the request with burpsuite and for a hydra command.
 
 Burpsuite Request
-````
+```
 POST /wp-login.php HTTP/1.1
 Host: 10.38.1.111
 User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0
