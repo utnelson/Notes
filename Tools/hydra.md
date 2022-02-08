@@ -1,6 +1,11 @@
 # Hydra
 
+## Flags
+```
+-t  Number of parallel connections per target
+-vV Sets verbose mode to very verbose, shows the login+pass combination for each attempt
 
+```
 ## Bruteforce HTTP Form
 
 To bruteforce a Login catch the request with burpsuite and for a hydra command.
@@ -42,3 +47,12 @@ Payload:
 `^USER^` & ``^PASS^`` are used as placeholder. 
 ``"F=Invalid username"`` is the string for the error message.
 ---
+## Bruteforce FTP
+```
+root@machine:~$ hydra -v -C /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt -f 10.0.0.3 ftp
+
+Options
+    -v verbose mode.
+    -C <user:pass file>: colon-separated “login:pass” format.
+    -f exit after the first found user/password pair.
+```
