@@ -15,6 +15,7 @@ show start command with grep
 ```console
 root@machine:~$ ps aux | grep mongo
 ```
+---
 
 cat all with keyword "test" and 20 lines bevor and after
 ```console
