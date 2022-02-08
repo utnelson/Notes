@@ -19,4 +19,6 @@ Payload:
     '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=Invalid username'
 ```
 
-^USER^ & ^PASS^ are used as placeholder. "F=Invalid username" is the string for the error message.
+`^USER^` & ^PASS^ are used as placeholder. "F=Invalid username" is the string for the error message.
+
+---
