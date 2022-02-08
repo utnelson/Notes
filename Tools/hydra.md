@@ -4,7 +4,7 @@
 ## Bruteforce
 `code`
 
-[click on this link](#my-multi-word-header)
+[click on this link](#hydra)
 ```shell
 foo@bar:~$ whoami
 foo
