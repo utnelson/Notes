@@ -3,8 +3,9 @@
 ### Processes
 
 
-- show processes
+
 ```console
+show processes
 root@machine:~$ ps aux
 ```
 
