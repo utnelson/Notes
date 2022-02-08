@@ -7,10 +7,12 @@
 ```console
 root@machine:~$ ps aux
 ```
+
 - show start command by PID
 ```console
 root@machine:~$ ps -e {PID} -o args
 ```
+
 - show start command with grep
 ```console
 root@machine:~$ ps aux | grep mongo
