@@ -1,5 +1,5 @@
 # Bruteforce
 
-hydra
-fuff
+- hydra
+- fuff
 
