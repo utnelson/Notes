@@ -3,7 +3,7 @@
 ## decrypt file
 
 ```console
-import key
+import key | you need the passphrase > look at john to crack the hash
 
 root@machine:~$ gpg --import tryhackme.asc 
 ```
