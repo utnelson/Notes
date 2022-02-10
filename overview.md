@@ -1,5 +1,1 @@
-# Bruteforce
-
-- hydra
-- fuff
 
