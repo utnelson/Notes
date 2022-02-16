@@ -28,6 +28,11 @@ Copy file via ssh to target
 ```console
 root@machine:~$ scp <local file> user@<IP target>:<directory target>
 ```
+
+Copy file via ssh to local
+```console
+root@machine:~$ scp user@<IP target>:<directory target> <local file>
+```
 You may need to enter the password.
 
 ## Bruteforce SSH
