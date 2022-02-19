@@ -10,7 +10,7 @@ $ unshadow <passwd> <shadow> > hashes.txt
 
 Then crack it with john
 
-```shell
+```console
 $ john --wordlist=/usr/share/wordlists/rockyou.txt --format=sha512crypt new.txt 
 Using default input encoding: UTF-8
 Loaded 3 password hashes with 3 different salts (sha512crypt, crypt(3) $6$ [SHA512 256/256 AVX2 4x])
