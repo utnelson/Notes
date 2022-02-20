@@ -3,8 +3,8 @@
 ## Methodology
 
 - Scripts
-LinEnum - [Link](https://github.com/rebootuser/LinEnum)
-LinpPeas - [Link](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
+    - LinEnum - [Link](https://github.com/rebootuser/LinEnum)
+    - LinpPeas - [Link](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
 
 - sudo -l
 
