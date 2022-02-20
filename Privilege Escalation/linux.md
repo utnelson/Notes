@@ -190,5 +190,12 @@ drwxrwxrwt 1 root root   822 20. Feb 12:26 ..
 -rwxr-xr-x 1 root root 16712 20. Feb 12:26 nfs
 -rw-r--r-- 1 root root    71 20. Feb 12:26 root.c
 
+$ chmod +s root
+$ ls -la
+total 28
+drwxr-xr-x 2 root root  4096 20. Feb 12:35 .
+drwxrwxrwt 1 root root   834 20. Feb 12:35 ..
+-rwsr-sr-x 1 root root 16712 20. Feb 12:35 root
+-rw-r--r-- 1 root root    99 20. Feb 12:33 root.c
 ```
 
