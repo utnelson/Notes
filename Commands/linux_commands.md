@@ -1,44 +1,54 @@
 # Usefull Commands
 
-### Processes
+## Processes
 
 ```console
 show processes
 
-root@machine:~$ ps aux
+$ ps aux
 ```
 
 ```console
 show start command by PID
 
-root@machine:~$ ps -e {PID} -o args
+$ ps -e {PID} -o args
 ```
 
 
 ```console
 show start command with grep
 
-root@machine:~$ ps aux | grep <name>
+$ ps aux | grep <name>
 ```
 ---
-### Cat
+## Cat
 ```console
 cat all with keyword "test" and 20 lines bevor and after
 
-root@machine:~$ cat * | grep -A 20 -B 20 "test"
+$ cat * | grep -A 20 -B 20 "test"
 ```
 ---
-### Sort
+## Sort
 ```console
 sort file and only uniq words + count
 
-root@machine:~$ sort <file> | uniq | wc -l
-root@machine:~$ sort <file> | uniq > file.txt
+$ sort <file> | uniq | wc -l
+$ sort <file> | uniq > file.txt
 ```
 
-### Network
+## Network
 ```console
 netstat
 
-root@machine:~$ netstat
+$ netstat
+```
+
+## Cut
+
+```console
+$ cat /etc/passwd | cut -d ":" -f 1
+
+Show only usernames
+-d delimiter ":"
+-f field
 ```
