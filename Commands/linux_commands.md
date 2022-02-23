@@ -52,3 +52,10 @@ Show only usernames
 -d delimiter ":"
 -f field
 ```
+
+## Variables
+
+```console
+$ export VAR=value
+use it with -> $var
+```

