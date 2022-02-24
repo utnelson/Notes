@@ -11,7 +11,7 @@ $ python2 -c 'import pty; pty.spawn("/bin/bash")'
 $ python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 Step 2
-$export TERM=xterm
+$ export TERM=xterm
 
 Step 3
 STRG + Z to Backround shell
