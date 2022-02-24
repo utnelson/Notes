@@ -20,6 +20,24 @@ show start command with grep
 
 $ ps aux | grep <name>
 ```
+
+## grep
+
+Grep is an essential Linux and Unix command. It is used to search text and strings in a given file.
+
+```console
+$ grep -rn -e "text"
+
+-r, --recursive
+              Read  all files under each directory, recursively, following symbolic links only if they are on the command line.  Note that if no file operand is given, grep searches
+              the working directory.  This is equivalent to the -d recurse option.
+-n, --line-number
+              Prefix each line of output with the 1-based line number within its input file.
+-e PATTERNS, --regexp=PATTERNS
+              Use PATTERNS as the patterns.  If this option is used multiple times or is combined with the -f (--file) option, search for all patterns given.   This  option  can  be
+              used to protect a pattern beginning with “-”.
+```
+
 ---
 ## Cat
 ```console
