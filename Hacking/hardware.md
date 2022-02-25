@@ -14,5 +14,4 @@ DECIMAL   	HEX       	DESCRIPTION
 
 Extract firmware
 $ binwalk -e firmware.bin
-
 ```
