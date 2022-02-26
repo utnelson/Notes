@@ -16,6 +16,16 @@ root@machine:~$ gpg --output ./plaintext.txt --decrypt ./credential.pgp
 
 # John
 
+
+## format list
+
+`john --list=formats | grep "looking for"`
+
+```console
+--format=Raw-SHA256
+
+```
+
 ## gpg Hash
 
 ```console
@@ -28,6 +38,12 @@ root@machine:~$ gpg2john tryhackme.asc > hash
 crack the hash with wordlist
 
 root@machine:~$ john --wordlist=/usr/share/wordlists/rockyou.txt hash 
+```
+
+## SHA-256 Hash
+
+```console
+$ john hash.txt --format=Raw-SHA256 --wordlist=/usr/share/wordlists/rockyou.txt
 ```
 
 # hash-identifier

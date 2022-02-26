@@ -96,6 +96,8 @@ Like CronTab in Linux
 $ schtasks /query /fo LIST /v
 ```
 
+"C:/Program Files (x86)/ScheduledTask/Events"
+
 ## DLL hijacking
 
 Windows follow one og these concepts:
