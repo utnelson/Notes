@@ -195,6 +195,10 @@ $ sc start unquotedsvc
 ```
 
 ## Token Impersonation
+
+[Potato Exploits](https://jlajara.gitlab.io/others/2020/11/22/Potatoes_Windows_Privesc.html)
+Windows 10 and Server 2016/2019 - [PrintSpoofer](https://github.com/itm4n/PrintSpoofer)
+
 This access token consists of:
 - user SIDs(security identifier)
 - group SIDs
