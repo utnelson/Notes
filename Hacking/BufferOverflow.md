@@ -16,9 +16,24 @@ $ /usr/shares/metasploit-framework/tools/exploit/nasm_shell.rb
 
 ## Mona
 
+```console
 Set up working directory:
-`!mona config -set workingfolder c:\mona\%p`
+!mona config -set workingfolder c:\mona\%p
 
+Find offset:
+!mona findmsp -distance 600
+- distance lenght of payload
+
+Create bytearray:
+!mona bytearray -b "\x00"
+-b "bad chars"
+
+Compare bytearray with bytes in stack
+!mona compare -f C:\mona\oscp\bytearray.bin -a <ESP address>
+
+Find jump esp
+!mona jmp -r esp -cpb "<all bad chars>"
+```
 
 
 ## Fuzzing
