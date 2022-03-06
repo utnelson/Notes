@@ -1,15 +1,8 @@
 # Overview
 
-# Bruteforce
+# ToDo
 
-- hydra
-- fuff
+https://medium.themayor.tech/official-gatekeeper-writeup-ea9e2f6dd85
+- psexec 
+- msf module firefox + firefox decrypt
 
-# Hash
-
-- john
-- gpg
-
-# Tools
-
-- ssh
