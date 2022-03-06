@@ -1,5 +1,8 @@
 # BufferOverflow
 
+Encoding needs to be "latin-1"
+End send command with "\r\n"
+
 ## Registers
 
 ### EIP
@@ -46,6 +49,8 @@ Compare bytearray with bytes in stack
 
 Find jump esp
 !mona jmp -r esp -cpb "<all bad chars>"
+
+!mona jmp -r esp -m <name of exe>
 ```
 
 ## Fuzzing
