@@ -1,5 +1,44 @@
 # Active Directory
 
+## Enumeration w/ Powerview
+
+Gain access to the machine
+
+```powershell
+controller\administrator@DOMAIN-CONTROLL C:\Users\Administrator>powershell -ep bypass
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+-ep bypasses the execution policy of powershell allowing you to easily run scripts
+
+Start Powerview
+. .\Downloads\PowerView.ps1
+Get-NetUser | select cn
+
+cn
+--
+Administrator
+Guest
+krbtgt
+Machine-1
+Admin2
+Machine-2
+SQL Service
+POST{P0W3RV13W_FTW}
+sshd
+
+PS C:\Users\Administrator> Get-NetGroup -GroupName *admin* 
+Administrators 
+Hyper-V Administrators
+Storage Replica Administrators 
+Schema Admins
+Enterprise Admins
+Domain Admins
+Key Admins
+Enterprise Key Admins
+DnsAdmins
+```
+[Cheatsheet](https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993)
+
 ## Kerberos
 
 Kerberos is the default authentication service for Microsoft Windows domains. It is intended to be more "secure" than NTLM by using third party ticket authorization as well as stronger encryption. Even though NTLM has a lot more attack vectors to choose from Kerberos still has a handful of underlying vulnerabilities just like NTLM that we can use to our advantage.

