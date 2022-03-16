@@ -1,5 +1,7 @@
 # GDB
 
+Use python2 !
+
 ## Commands
 
 ```console
