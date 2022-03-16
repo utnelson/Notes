@@ -1,5 +1,16 @@
 # GDB
 
+## Commands
+
+```console
+(gdb) set disassembly-flavor intel
+- Set the Intel syntax
+
+(gdb) disassemble main
+- disassemble the program's main function
+
+```
+
 ## Fuzzing
 
 ```console
