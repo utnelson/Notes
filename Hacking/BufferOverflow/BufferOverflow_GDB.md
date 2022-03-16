@@ -11,6 +11,8 @@ Use python2 !
 (gdb) disassemble main
 - disassemble the program's main function
 
+(gdb) x/2000xb $esp+500
+-examine 
 ```
 
 ## Fuzzing
