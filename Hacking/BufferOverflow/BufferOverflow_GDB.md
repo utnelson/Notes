@@ -5,14 +5,14 @@
 Hint 1: Step to overflow 64-bits buffer
 
 Step 1: Generate a pattern, copy and paste this as input to the binary (use pattern_create.rb from
-Metasploit)
-Step 2: Read and copy the value from register RBP for the offset.
-Step 3: Calculate the offset. (use pattern_offset.rb from Metasploit)
-Step 4: Try control the register RIP with the following payload
-Junk*(offset value) + 8 bytes of dummy
-Step 5: Read the stack or register RSP to find a suitable return address.
-Step 6: The general payload should be like below
-Nop + shellcode + Junks + return address
+Metasploit)  
+Step 2: Read and copy the value from register RBP for the offset.  
+Step 3: Calculate the offset. (use pattern_offset.rb from Metasploit)  
+Step 4: Try control the register RIP with the following payload  
+Junk*(offset value) + 8 bytes of dummy  
+Step 5: Read the stack or register RSP to find a suitable return address.  
+Step 6: The general payload should be like below  
+Nop + shellcode + Junks + return address  
 
 Hint 2: Working shellcode
 
