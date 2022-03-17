@@ -24,6 +24,12 @@ Segmentation fault (core dumped)
 ```
 
 ## Using GDB
+Hello there can anyone explain me the difference between these to commands? Sometime the first one is working and sometimes only the second one 
+
+```console
+(gdb) run $(python -c 'print("A" * 650)')
+(gdb) r < <(python -c 'print("A" * 650)')
+```
 
 ```console
 $ gdb -q ./bof
@@ -60,4 +66,14 @@ ds             0x0      0
 es             0x0      0
 fs             0x0      0
 gs             0x0      0
+
+(gdb) x/xg $rsp
+0x7fffffffe3b8: 0x3775413675413575
+```
+
+Create a pattern with 650 bytes, run it and check the offset with the **rsp** `0x3775413675413575`
+
+```console
+$ /usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -q 0x3775413675413575
+[*] Exact match at offset 616
 ```
