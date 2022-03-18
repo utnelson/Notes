@@ -1,13 +1,22 @@
 # GDB
 
-## THM 64 Bit
-
-Hint 1: Step to overflow 64-bits buffer
+## 64 Bit
 
 Step 1: Generate a pattern, copy and paste this as input to the binary (use pattern_create.rb from
-Metasploit)  
-Step 2: Read and copy the value from register RBP for the offset.  
-Step 3: Calculate the offset. (use pattern_offset.rb from Metasploit)  
+Metasploit)
+or gdb-peda -> pattern arg 2000 (runs program with arg)
+
+Step 2: Read and copy the value from register RBP for the offset. 
+
+Step 3: Calculate the offset. (use pattern_offset.rb from Metasploit) 
+gdb-peda > patts
+
+```console
+Registers point to pattern buffer:
+[RSI] --> offset 1982 - size ~18
+[RDI] --> offset 1982 - size ~18
+[RSP] --> offset 1032 - size ~203
+``` 
 Step 4: Try control the register RIP with the following payload  
 Junk*(offset value) + 8 bytes of dummy  
 Step 5: Read the stack or register RSP to find a suitable return address.  

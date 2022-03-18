@@ -94,7 +94,7 @@ echo $PATH
 
 Add direcotry to PATH var
 ```console
-export PATH=/tmp:$PATH
+export=/tmp:$PATH
 ```
 
 Find writeble folders
