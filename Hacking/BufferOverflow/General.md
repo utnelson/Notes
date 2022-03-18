@@ -1,4 +1,6 @@
-# CPU Registers
+# General
+
+## CPU Registers
 
 **Data registers**
 | 32-bit Register | 64-bit Register | Description |
